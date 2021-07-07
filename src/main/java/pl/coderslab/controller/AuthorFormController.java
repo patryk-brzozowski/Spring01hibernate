@@ -64,7 +64,6 @@ public class AuthorFormController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteAuthorForm(@PathVariable long id, Model model) {
         Author author = authorDao.findAuthorById(id);
-
         model.addAttribute("author", author);
         return "/authordelete.jsp";
     }

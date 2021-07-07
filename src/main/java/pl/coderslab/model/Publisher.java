@@ -54,9 +54,6 @@ public class Publisher {
 
     @Override
     public String toString() {
-        return "Publisher{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        return String.format("id: %s, name: %s, nip: %s, regon: %s", id, name, nip, regon);
     }
 }
