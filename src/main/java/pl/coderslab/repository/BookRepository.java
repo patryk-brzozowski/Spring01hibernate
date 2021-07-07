@@ -22,7 +22,7 @@ public interface BookRepository extends JpaRepository<Book, Long> {
 
     List<Book> findBooksByRating(int rating);
 
-    Book findFirstByCategory(Category category);
+    Book findFirstByCategoryOrderByTitle(Category category);
 
     Book findById(long id);
 

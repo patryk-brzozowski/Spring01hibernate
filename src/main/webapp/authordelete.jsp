@@ -13,7 +13,7 @@
 <body>
 <H2>Are you sure?</H2>
 <form method="post">
-  <input type="hidden" name="id" value="${book.id}"/>
+  <input type="hidden" name="id" value="${author.id}"/>
   <input type="submit" value="Confirm">
 </form>
 <a href="/authorform/show">Cancel</a>

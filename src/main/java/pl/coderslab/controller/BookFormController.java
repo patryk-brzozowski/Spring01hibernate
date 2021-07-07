@@ -23,10 +23,10 @@ import java.util.List;
 @RequestMapping(value = "/bookform")
 public class BookFormController {
 
-    private PublisherDao publisherDao;
-    private BookRepository bookDao;
-    private AuthorDao authorDao;
-    private CategoryRepository categoryDao;
+    private final PublisherDao publisherDao;
+    private final BookRepository bookDao;
+    private final AuthorDao authorDao;
+    private final CategoryRepository categoryDao;
 
     @Autowired
     public BookFormController(PublisherDao publisherDao, BookRepository bookDao, AuthorDao authorDao, CategoryRepository categoryDao) {
@@ -73,19 +73,17 @@ public class BookFormController {
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.POST)
-    @ResponseBody
     public String updateBook(@Valid Book book, BindingResult result) {
         if(result.hasErrors()) {
             return "/bookform.jsp";
         }
         bookDao.save(book);
-        return "Book updated";
+        return "/bookform/show";
     }
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
-    @ResponseBody
     public String deleteBook(@RequestParam long id) {
         bookDao.deleteById(id);
-        return "Book deleted";
+        return "/bookform/show";
     }
 
     @ModelAttribute("ratings")
@@ -108,14 +106,14 @@ public class BookFormController {
         return categoryDao.findAll();
     }
 
-    @RequestMapping(value = "/show/rating")
+    @RequestMapping(value = "/show/rating", method = RequestMethod.POST)
     public String showBooksByRating(Model model, @RequestParam int rating){
         List<Book> books = bookDao.findBooksByRating(rating);
         model.addAttribute("books", books);
         return "/books.jsp";
     }
 
-    @RequestMapping(value = "/show/publisher")
+    @RequestMapping(value = "/show/publisher", method = RequestMethod.POST)
     public String showBooksByPublisher(Model model, @RequestParam int id){
         Publisher publisher = publisherDao.findById(id);
         List<Book> books = bookDao.findBooksByPublisher(publisher);
@@ -123,4 +121,11 @@ public class BookFormController {
         return "/books.jsp";
     }
 
+    @RequestMapping(value = "/show/category", method = RequestMethod.POST)
+    public String showBooksByCategory(Model model, @RequestParam long id){
+        Category category = categoryDao.findCategoryById(id);
+        Book book = bookDao.findFirstByCategoryOrderByTitle(category);
+        model.addAttribute("books", Arrays.asList(book));
+        return "/books.jsp";
+    }
 }

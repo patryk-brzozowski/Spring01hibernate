@@ -43,4 +43,6 @@ public class AuthorController {
         authorDao.deleteAuthor(id);
         return "Author deleted";
     }
+
+
 }

@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface AuthorRepository extends JpaRepository<Author, Long> {
 
+    Author findAuthorById(long id);
+
     Author findAuthorByEmail(String email);
 
     Author findAuthorByPesel(String pesel);

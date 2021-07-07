@@ -20,5 +20,32 @@
 <br/>
 <br/>
 <a href="/authorform">Add new author</a>
+
+<form method="post" action="/authorform/show/pesel">
+
+    <label for="pesel">Find by pesel:</label>
+    <input type="text" name="pesel" id="pesel">
+
+    <input type="submit" value="Find">
+</form>
+
+<form method="post" action="/authorform/show/email">
+
+
+    <label for="email">Find by email:</label>
+    <input type="text" name="email" id="email">
+
+    <input type="submit" value="Find">
+</form>
+
+<form method="post" action="/authorform/show/lastName">
+
+
+    <label for="lastName">Find by last name:</label>
+    <input type="text" name="lastName" id="lastName">
+
+    <input type="submit" value="Find">
+</form>
+
 </body>
 </html>
