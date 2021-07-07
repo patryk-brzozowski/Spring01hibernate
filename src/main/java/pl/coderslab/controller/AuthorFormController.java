@@ -1,22 +1,18 @@
 package pl.coderslab.controller;
 
-import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import pl.coderslab.dao.AuthorDao;
 import pl.coderslab.dao.BookDao;
 import pl.coderslab.dao.PublisherDao;
 import pl.coderslab.model.Author;
 import pl.coderslab.model.Book;
-import pl.coderslab.model.Publisher;
 import pl.coderslab.repository.AuthorRepository;
 
 import javax.validation.Valid;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 @Controller
@@ -28,7 +24,6 @@ public class AuthorFormController {
     private BookDao bookDao;
     private final AuthorRepository authorDao;
 
-//    OGARNĄĆ USUWANIE
 
     @Autowired
     public AuthorFormController(PublisherDao publisherDao, BookDao bookDao, AuthorRepository authorDao) {
@@ -69,12 +64,7 @@ public class AuthorFormController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteAuthorForm(@PathVariable long id, Model model) {
         Author author = authorDao.findAuthorById(id);
-        List<Book> books = author.getBooks();
-        for (Book book : books) {
-            List<Author> authors = book.getAuthors();
-            authors.removeIf(auth -> auth.getId() == author.getId());
-            bookDao.updateBook(book);
-        }
+
         model.addAttribute("author", author);
         return "/authordelete.jsp";
     }
@@ -89,6 +79,13 @@ public class AuthorFormController {
     }
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.POST)
     public String deleteAuthor(@RequestParam long id) {
+        Author author = authorDao.findAuthorById(id);
+        List<Book> books = author.getBooks();
+        for (Book book : books) {
+            List<Author> authors = book.getAuthors();
+            authors.removeIf(auth -> auth.getId() == author.getId());
+            bookDao.updateBook(book);
+        }
         authorDao.deleteById(id);
         return "/authorform/show";
     }

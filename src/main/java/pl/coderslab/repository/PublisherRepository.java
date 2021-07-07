@@ -8,4 +8,6 @@ public interface PublisherRepository extends JpaRepository<Publisher, Long> {
     Publisher findPublisherByNip(String nip);
 
     Publisher findPublisherByRegon(String regon);
+
+    Publisher findPublishersById (long id);
 }
