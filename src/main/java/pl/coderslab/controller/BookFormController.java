@@ -121,11 +121,26 @@ public class BookFormController {
         return "/books.jsp";
     }
 
-    @RequestMapping(value = "/show/category", method = RequestMethod.POST)
-    public String showBooksByCategory(Model model, @RequestParam long id){
+    @RequestMapping(value = "/show/firstbycategory", method = RequestMethod.POST)
+    public String showFirstBookByCategory(Model model, @RequestParam long id){
         Category category = categoryDao.findCategoryById(id);
         Book book = bookDao.findFirstByCategoryOrderByTitle(category);
         model.addAttribute("books", Arrays.asList(book));
+        return "/books.jsp";
+    }
+
+    @RequestMapping(value = "/show/category", method = RequestMethod.POST)
+    public String showBooksByCategory(Model model, @RequestParam long id){
+        Category category = categoryDao.findCategoryById(id);
+        List<Book> books = bookDao.findByCategory(category);
+        model.addAttribute("books", books);
+        return "/books.jsp";
+    }
+
+    @RequestMapping(value = "/show/title", method = RequestMethod.POST)
+    public String showBooksByTitle(Model model, @RequestParam String title){
+        List<Book> books = bookDao.findByTitle(title);
+        model.addAttribute("books", books);
         return "/books.jsp";
     }
 }

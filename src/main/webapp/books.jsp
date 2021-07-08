@@ -47,9 +47,20 @@
     <input type="submit" value="Find">
 </form>
 
+<form method="post" action="/bookform/show/firstbycategory">
+
+    <label for="firstbycategory">Find first by category:</label>
+    <select  name="id" id="firstbycategory" >
+        <c:forEach items="${categories}" var="category">
+            <option value="${category.id}">${category.name}</option>
+        </c:forEach>
+    </select>
+    <input type="submit" value="Find">
+</form>
+
 <form method="post" action="/bookform/show/category">
 
-    <label for="category">Find first by category:</label>
+    <label for="category">Find by category:</label>
     <select  name="id" id="category" >
         <c:forEach items="${categories}" var="category">
             <option value="${category.id}">${category.name}</option>
@@ -57,5 +68,15 @@
     </select>
     <input type="submit" value="Find">
 </form>
+
+<form method="post" action="/bookform/show/title">
+
+    <label for="title">Find by title:</label>
+    <input type="text" name="title" id="title">
+    <input type="submit" value="Find">
+</form>
+
+
+<a href="/bookform/show">Show all</a>
 </body>
 </html>

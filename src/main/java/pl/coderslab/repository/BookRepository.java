@@ -1,6 +1,7 @@
 package pl.coderslab.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import pl.coderslab.model.Author;
 import pl.coderslab.model.Book;
 import pl.coderslab.model.Category;
@@ -25,5 +26,11 @@ public interface BookRepository extends JpaRepository<Book, Long> {
     Book findFirstByCategoryOrderByTitle(Category category);
 
     Book findById(long id);
+
+    @Query("SELECT b FROM Book b WHERE b.title = ?1")
+    List<Book> findByTitle(String title);
+
+    @Query("SELECT b FROM Book b WHERE b.category = ?1")
+    List<Book> findByCategory(Category category);
 
 }

@@ -47,5 +47,7 @@
     <input type="submit" value="Find">
 </form>
 
+
+<a href="/authorform/show">Show all</a>
 </body>
 </html>
