@@ -47,6 +47,24 @@
     <input type="submit" value="Find">
 </form>
 
+<form method="post" action="/authorform/show/emailstarting">
+
+
+    <label for="emailstarting">Find by email starting with:</label>
+    <input type="text" name="letters" id="emailstarting">
+
+    <input type="submit" value="Find">
+</form>
+
+<form method="post" action="/authorform/show/peselstarting">
+
+
+    <label for="peselstarting">Find by pesel starting with:</label>
+    <input type="text" name="numbers" id="peselstarting">
+
+    <input type="submit" value="Find">
+</form>
+
 
 <a href="/authorform/show">Show all</a>
 </body>

@@ -16,6 +16,7 @@ import pl.coderslab.repository.BookRepository;
 import pl.coderslab.repository.CategoryRepository;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -116,7 +117,7 @@ public class BookFormController {
     @RequestMapping(value = "/show/publisher", method = RequestMethod.POST)
     public String showBooksByPublisher(Model model, @RequestParam int id){
         Publisher publisher = publisherDao.findById(id);
-        List<Book> books = bookDao.findBooksByPublisher(publisher);
+        List<Book> books = bookDao.findByPublisher(publisher);
         model.addAttribute("books", books);
         return "/books.jsp";
     }
@@ -142,5 +143,24 @@ public class BookFormController {
         List<Book> books = bookDao.findByTitle(title);
         model.addAttribute("books", books);
         return "/books.jsp";
+    }
+
+    @RequestMapping(value = "/show/rating/range", method = RequestMethod.POST)
+    public String showBooksByRatingRange(Model model, @RequestParam int a, @RequestParam int b){
+        List<Book> books;
+        if (a<=b) {
+            books = bookDao.findBooksWhereRatingIs(a, b);
+        } else {
+            books = bookDao.findBooksWhereRatingIs(b, a);
+        }
+        model.addAttribute("books", books);
+        return "/books.jsp";
+    }
+
+    @RequestMapping(value = "/show/firstcategory", method = RequestMethod.POST)
+    public String showFirstBookByCategory(Model model, @RequestParam int id){
+       Book book = bookDao.findFirstBookByCategorySortedByTitle(id);
+       model.addAttribute("books", Arrays.asList(book));
+       return "/books.jsp";
     }
 }

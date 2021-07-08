@@ -109,4 +109,18 @@ public class AuthorFormController {
         model.addAttribute("authors", authors);
         return "/authors.jsp";
     }
+
+    @RequestMapping(value = "/show/emailstarting", method = RequestMethod.POST)
+    public String showAuthorsByEmailStartingWith(Model model, @RequestParam String letters){
+        List<Author> authors = authorDao.findAuthorsByEmailStartingWith(letters);
+        model.addAttribute("authors", authors);
+        return "/authors.jsp";
+    }
+
+    @RequestMapping(value = "/show/peselstarting", method = RequestMethod.POST)
+    public String showAuthorsByPeselStartingWith(Model model, @RequestParam String numbers){
+        List<Author> authors = authorDao.findAuthorsByPeselStartingWith(numbers);
+        model.addAttribute("authors", authors);
+        return "/authors.jsp";
+    }
 }

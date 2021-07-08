@@ -76,6 +76,34 @@
     <input type="submit" value="Find">
 </form>
 
+<form method="post" action="/bookform/show/rating/range">
+
+    <label for="ratingrangea">Find by rating range (first number):</label>
+    <select  name="a" id="ratingrangea" >
+        <c:forEach items="${ratings}" var="rating">
+            <option value="${rating}">${rating}</option>
+        </c:forEach>
+    </select>
+
+    <label for="ratingrangeb">(second number):</label>
+    <select  name="b" id="ratingrangeb" >
+        <c:forEach items="${ratings}" var="rating">
+            <option value="${rating}">${rating}</option>
+        </c:forEach>
+    </select>
+    <input type="submit" value="Find">
+</form>
+
+<form method="post" action="/bookform/show/firstcategory">
+
+    <label for="firstcategory">Find first by category:</label>
+    <select  name="id" id="firstcategory" >
+        <c:forEach items="${categories}" var="category">
+            <option value="${category.id}">${category.name}</option>
+        </c:forEach>
+    </select>
+    <input type="submit" value="Find">
+</form>
 
 <a href="/bookform/show">Show all</a>
 </body>
